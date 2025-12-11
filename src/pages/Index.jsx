@@ -82,11 +82,7 @@ const Index = () => {
             <HeroSection onStartChat={handleStartChat} />
             <BiographySection />
             
-            {/* Quick access questions on mobile */}
-            <div className="mt-6 md:hidden">
-              <h2 className="text-lg font-semibold mb-3 text-center">Quick Questions</h2>
-              <ExampleQuestions onSelect={handleStartChat} disabled={false} />
-            </div>
+
           </>
         )}
 

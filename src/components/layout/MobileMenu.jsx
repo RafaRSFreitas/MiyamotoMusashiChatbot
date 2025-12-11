@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/sheet";
 
 const MobileMenu = ({ isOpen, onClose, currentPage, onNavigate, hasChatStarted }) => {
-  const navItems = ["Home", "Chat", "About", "Settings"];
+  const navItems = ["Home", "Chat", "Settings", "About"];
 
   const getPageKey = (item) => item.toLowerCase();
 
