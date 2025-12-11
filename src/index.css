@@ -134,7 +134,7 @@
 }
 
 .thinking-dot {
-  animation: thinking 1.4s ease-in-out infinite;
+  animation: thinking 1s ease-in-out infinite;
 }
 
 .thinking-dot:nth-child(2) {
