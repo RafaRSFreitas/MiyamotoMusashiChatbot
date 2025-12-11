@@ -106,7 +106,7 @@ const ChatWindow = ({ messages, onMessagesChange }) => {
     <div className="flex flex-col h-full bg-background border-2 border-border rounded-lg overflow-hidden">
       {/* Header */}
       <div className="px-4 py-3 border-b-2 border-border bg-card">
-        <h2 className="text-xl font-semibold text-center">Samurai Chatbot</h2>
+        <h2 className="text-xl font-semibold text-center">Miyamoto Musashi Chatbot</h2>
         <p className="text-sm text-muted-foreground text-center">Musashi (Online)</p>
       </div>
 

@@ -18,7 +18,7 @@ const Header = ({ onMenuClick, currentPage, onNavigate, hasChatStarted }) => {
           <Button variant="ghost" size="icon" onClick={onMenuClick} aria-label="Open menu">
             <Menu className="w-6 h-6" />
           </Button>
-          <h1 className="text-xl font-semibold">Samurai Chatbot</h1>
+          <h1 className="text-xl font-semibold"></h1>
           <div className="w-10" /> {/* Spacer for centering */}
         </div>
 

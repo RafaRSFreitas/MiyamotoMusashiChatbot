@@ -5,11 +5,6 @@ import musashiBackground from "@/assets/musashi_background.png";
 const HeroSection = ({ onStartChat }) => {
   return (
     <div className="mb-6">
-      {/* Title above the card */}
-      <h1 className="text-2xl md:text-3xl font-bold text-primary mb-4 text-center">
-        Miyamoto Musashi Chatbot
-      </h1>
-      
       {/* Card with background image */}
       <section 
         className="relative overflow-hidden rounded-lg border-2 border-border bg-cover bg-center bg-no-repeat"
@@ -21,8 +16,14 @@ const HeroSection = ({ onStartChat }) => {
           aria-hidden="true"
         />
         
-        {/* Button at the bottom */}
-        <div className="relative z-10 flex justify-center py-12 px-4">
+        {/* Content container with title and button */}
+        <div className="relative z-10 flex flex-col justify-between items-center min-h-[300px] py-8 px-4">
+          {/* Title at the top */}
+          <h1 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center">
+            Miyamoto Musashi Chatbot
+          </h1>
+          
+          {/* Button at the bottom */}
           <Button
             onClick={onStartChat}
             size="default"
