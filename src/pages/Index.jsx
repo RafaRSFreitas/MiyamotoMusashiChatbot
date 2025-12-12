@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import MobileMenu from "@/components/layout/MobileMenu";
 import HeroSection from "@/components/home/HeroSection";
-import BiographySection from "@/components/home/BiographySection";
+import BiographySection from "@/components/about/BiographySection";
 import AccessibilitySettings from "@/components/settings/AccessibilitySettings";
 import ShortcutsInfo from "@/components/settings/ShortcutsInfo";
-import AboutChatbot from "@/components/settings/AboutChatbot";
+import AboutChatbot from "@/components/about/AboutChatbot";
 import ChatWindow from "@/components/chat/ChatWindow";
 import ExampleQuestions from "@/components/chat/ExampleQuestions";
 
@@ -67,10 +67,7 @@ const Index = () => {
       <main className="container mx-auto px-4 py-6 max-w-4xl">
         {currentPage === "home" && (
           <>
-            <HeroSection onStartChat={handleStartChat} />
-            <BiographySection />
-            
-
+            <HeroSection onStartChat={handleStartChat} />                
           </>
         )}
 
@@ -86,6 +83,7 @@ const Index = () => {
         {currentPage === "about" && (
           <div className="space-y-6">
             <h1 className="text-2xl font-bold">About</h1>
+            <BiographySection />
             <AboutChatbot />
           </div>
         )}
