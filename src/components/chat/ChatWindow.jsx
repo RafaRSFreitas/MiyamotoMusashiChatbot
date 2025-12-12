@@ -103,7 +103,7 @@ const ChatWindow = ({ messages, onMessagesChange }) => {
   }, [messages, streamChat, toast, onMessagesChange]);
 
   return (
-    <div className="flex flex-col h-full bg-background border-2 border-border rounded-lg overflow-hidden">
+    <div className="flex flex-col h-full bg-background border-2 border-border rounded-lg overflow-hidden min-h-[400px]">
       {/* Header */}
       <div className="px-4 py-3 border-b-2 border-border bg-card">
         <h2 className="text-xl font-semibold text-center">Miyamoto Musashi Chatbot</h2>
