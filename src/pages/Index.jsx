@@ -43,18 +43,6 @@ const Index = () => {
     }
   }, [settings.dyslexiaFont]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "/" && currentPage !== "chat") {
-        e.preventDefault();
-        setCurrentPage("chat");
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentPage]);
-
   const handleStartChat = () => {
     setCurrentPage("chat");
   };
@@ -106,7 +94,7 @@ const Index = () => {
           <div className="space-y-6">
             <h1 className="text-2xl font-bold">Settings</h1>
             <AccessibilitySettings settings={settings} onSettingsChange={setSettings} />
-            <ShortcutsInfo />
+            
           </div>
         )}
       </main>
