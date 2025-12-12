@@ -4,7 +4,7 @@ import musashiAvatar from "@/assets/musashi_avatar.png";
 const LoadingIndicator = () => {
   return (
     <div className="flex gap-3 mb-4">
-      <div className="w-10 h-10 rounded-full bg-secondary border-2 border-border flex items-center justify-center overflow-hidden shrink-0">
+      <div className="w-14 h-14 rounded-full bg-secondary border-2 border-border flex items-center justify-center overflow-hidden shrink-0">
         <img 
           src={musashiAvatar}
           alt="Musashi" 
