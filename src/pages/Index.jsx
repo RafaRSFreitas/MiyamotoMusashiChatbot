@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import MobileMenu from "@/components/layout/MobileMenu";
 import HeroSection from "@/components/home/HeroSection";
+import GetStarted from "@/components/home/GetStarted";
 import BiographySection from "@/components/about/BiographySection";
 import AccessibilitySettings from "@/components/settings/AccessibilitySettings";
 import ShortcutsInfo from "@/components/settings/ShortcutsInfo";
@@ -67,7 +68,8 @@ const Index = () => {
       <main className="container mx-auto px-4 py-6 max-w-4xl">
         {currentPage === "home" && (
           <>
-            <HeroSection onStartChat={handleStartChat} />                
+            <HeroSection onStartChat={handleStartChat} />     
+            <GetStarted onNavigate={setCurrentPage} />          
           </>
         )}
 
