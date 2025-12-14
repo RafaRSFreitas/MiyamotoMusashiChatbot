@@ -7,8 +7,7 @@ import ExampleQuestions from "./ExampleQuestions";
 import LoadingIndicator from "./LoadingIndicator";
 import { useToast } from "@/hooks/use-toast";
 
-// TODO: Replace with your backend API URL
-const CHAT_API_URL = "http://localhost:3000/api/chat";
+const CHAT_API_URL = "http://localhost:4000/api/chat";
 
 const ChatWindow = ({ messages, onMessagesChange }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,75 +20,58 @@ const ChatWindow = ({ messages, onMessagesChange }) => {
     }
   }, [messages]);
 
-  const streamChat = useCallback(async (userMessages) => {
-    const resp = await fetch(CHAT_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ messages: userMessages }),
-    });
-
-    if (!resp.ok) {
-      const errorData = await resp.json().catch(() => ({}));
-      throw new Error(errorData.error || `Request failed with status ${resp.status}`);
-    }
-
-    if (!resp.body) throw new Error("No response body");
-
-    const reader = resp.body.getReader();
-    const decoder = new TextDecoder();
-    let textBuffer = "";
-    let assistantContent = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      
-      textBuffer += decoder.decode(value, { stream: true });
-
-      let newlineIndex;
-      while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
-        let line = textBuffer.slice(0, newlineIndex);
-        textBuffer = textBuffer.slice(newlineIndex + 1);
-
-        if (line.endsWith("\r")) line = line.slice(0, -1);
-        if (line.startsWith(":") || line.trim() === "") continue;
-        if (!line.startsWith("data: ")) continue;
-
-        const jsonStr = line.slice(6).trim();
-        if (jsonStr === "[DONE]") break;
-
-        try {
-          const parsed = JSON.parse(jsonStr);
-          const content = parsed.choices?.[0]?.delta?.content;
-          if (content) {
-            assistantContent += content;
-            onMessagesChange((prev) => {
-              const last = prev[prev.length - 1];
-              if (last?.role === "assistant") {
-                return prev.map((m, i) =>
-                  i === prev.length - 1 ? { ...m, content: assistantContent } : m
-                );
-              }
-              return [...prev, { role: "assistant", content: assistantContent }];
-            });
-          }
-        } catch {
-          textBuffer = line + "\n" + textBuffer;
-          break;
-        }
-      }
-    }
-  }, [onMessagesChange]);
-
   const sendMessage = useCallback(async (text) => {
+    // Validate message
+    if (!text || typeof text !== 'string' || text.trim() === '') {
+      toast({
+        title: "Error",
+        description: "Message is required and must be a string.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const userMsg = { role: "user", content: text };
     onMessagesChange((prev) => [...prev, userMsg]);
     setIsLoading(true);
 
     try {
-      await streamChat([...messages, userMsg]);
+      // Start both the API call and the minimum delay timer
+      const startTime = Date.now();
+      const minDelay = 1500; 
+
+      const response = await fetch(CHAT_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: text }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `Request failed with status ${response.status}`);
+      }
+
+      const data = await response.json();
+      const replyText = data.text || data.reply || "I have no words.";
+      
+      // Calculate remaining time to reach minimum delay
+      const elapsedTime = Date.now() - startTime;
+      const remainingDelay = Math.max(0, minDelay - elapsedTime);
+      
+      // Wait for remaining time if needed
+      if (remainingDelay > 0) {
+        await new Promise(resolve => setTimeout(resolve, remainingDelay));
+      }
+      
+      // Add assistant's response after minimum delay
+      const assistantMsg = { 
+        role: "assistant", 
+        content: replyText
+      };
+      onMessagesChange((prev) => [...prev, assistantMsg]);
+
     } catch (error) {
       console.error("Chat error:", error);
       toast({
@@ -100,7 +82,7 @@ const ChatWindow = ({ messages, onMessagesChange }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [messages, streamChat, toast, onMessagesChange]);
+  }, [toast, onMessagesChange]);
 
   return (
     <div className="flex flex-col h-full bg-background border-2 border-border rounded-lg overflow-hidden min-h-[400px]">
@@ -121,9 +103,7 @@ const ChatWindow = ({ messages, onMessagesChange }) => {
         {messages.map((msg, idx) => (
           <ChatMessage key={idx} message={msg.content} isUser={msg.role === "user"} />
         ))}
-        {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
-          <LoadingIndicator />
-        )}
+        {isLoading && <LoadingIndicator />}
       </ScrollArea>
 
       {/* Input area */}
