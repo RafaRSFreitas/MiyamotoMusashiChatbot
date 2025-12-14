@@ -12,13 +12,13 @@ const CHAT_API_URL = "http://localhost:4000/api/chat";
 const ChatWindow = ({ messages, onMessagesChange }) => {
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef(null);
+  const messagesEndRef = useRef(null);
   const { toast } = useToast();
 
+  // Auto-scroll to bottom when messages change
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
 
   const sendMessage = useCallback(async (text) => {
     // Validate message
@@ -38,7 +38,7 @@ const ChatWindow = ({ messages, onMessagesChange }) => {
     try {
       // Start both the API call and the minimum delay timer
       const startTime = Date.now();
-      const minDelay = 1500; 
+      const minDelay = 1200; // Minimum 1200ms for loading animation
 
       const response = await fetch(CHAT_API_URL, {
         method: "POST",
@@ -104,6 +104,7 @@ const ChatWindow = ({ messages, onMessagesChange }) => {
           <ChatMessage key={idx} message={msg.content} isUser={msg.role === "user"} />
         ))}
         {isLoading && <LoadingIndicator />}
+        <div ref={messagesEndRef} />
       </ScrollArea>
 
       {/* Input area */}
