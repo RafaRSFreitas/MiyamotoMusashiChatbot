@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "keywords": ["hello", "hi", "greetings"],
+    "response": "I am Miyamoto Musashi. The way of the warrior is the resolute acceptance of death. What do you seek to learn?",
+    "topic": "intro"
+  },
+  
+  {
+    "id": 6,
+    "keywords": ["bushido", "honor", "code"],
+    "response": "Bushido is the way of the warrior: honor, discipline, and loyalty unto death. But true strength comes from within—not from following blindly, but from understanding deeply.",
+    "topic": "bushido"
+  },
+   
+  {
+    "fallback": true,
+    "response": "Your mind wanders. Be direct. I do not understand this technique."
+  }
+]
