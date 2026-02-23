@@ -5,7 +5,7 @@ import chatRoutes from './routes/chatRoutes.js';
 
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors({
   origin: ['http://localhost:8080', 'http://localhost:3000', 'http://localhost:5173'],

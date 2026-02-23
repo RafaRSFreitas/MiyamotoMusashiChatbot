@@ -7,7 +7,7 @@ import ExampleQuestions from "./ExampleQuestions";
 import LoadingIndicator from "./LoadingIndicator";
 import { useToast } from "@/hooks/use-toast";
 
-const CHAT_API_URL = "http://localhost:4000/api/chat";
+const CHAT_API_URL = "https://miyamoto-musashi-chatbot-backend.onrender.com/api/chat";
 
 const ChatWindow = ({ messages, onMessagesChange }) => {
   const [isLoading, setIsLoading] = useState(false);
