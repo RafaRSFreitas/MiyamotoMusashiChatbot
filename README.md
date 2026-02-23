@@ -8,6 +8,5 @@ A conversational AI chatbot that simulates dialogue with the legendary Japanese 
 - **Historical Figure:** Miyamoto Musashi (1584-1645)
 
 ## Team Members
-- Jan Kaplan
-- Rafael Ribeiro Suzuki Freitas
-- Ryan Shephard
+- Rafael Ribeiro Suzuki Freitas (project management, frontend and backend developer)
+- Ryan Shephard (project management and documentation)
