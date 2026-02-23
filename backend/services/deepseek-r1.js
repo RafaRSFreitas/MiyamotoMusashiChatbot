@@ -28,7 +28,7 @@ export async function callDeepSeek(messages) {
       "x-wait-for-model": "true",
     },
     body: JSON.stringify({
-      model: "meta-llama/Meta-Llama-3-8B-Instruct",
+      model: "meta-llama/Llama-3.1-8B-Instruct",
       messages: [
         { role: "system", content: systemPrompt },
         ...messages  
