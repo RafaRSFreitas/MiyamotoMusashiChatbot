@@ -1,5 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import musashiAvatar from "@/assets/musashi_avatar.png";
+import seitoAvatar from "@/assets/seito.png";
 
 const ChatMessage = ({ message, isUser }) => {
   return (
@@ -7,7 +9,7 @@ const ChatMessage = ({ message, isUser }) => {
       {!isUser && (
         <div className="w-14 h-14 rounded-full bg-secondary border-2 border-border flex items-center justify-center overflow-hidden shrink-0">
           <img 
-            src="src/assets/musashi_avatar.png"
+            src={musashiAvatar}
             alt="Musashi" 
             className="w-full h-full object-cover"
           />
@@ -28,7 +30,7 @@ const ChatMessage = ({ message, isUser }) => {
       {isUser && (
         <div className="w-14 h-14 rounded-full bg-secondary border-2 border-border flex items-center justify-center overflow-hidden shrink-0">
           <img 
-            src="src/assets/seito.png"
+            src={seitoAvatar  }
             alt="User" 
             className="w-full h-full object-cover"
           />
