@@ -13,3 +13,4 @@ A conversational AI chatbot that simulates dialogue with the legendary Japanese 
 
 ## Available website
 [https://miyamoto-musashi-chatbot.vercel.app/](https://miyamoto-musashi-chatbot.vercel.app/)
+(Please note that the first answer from the robot may take a few extra seconds due to the free API used for this project)
